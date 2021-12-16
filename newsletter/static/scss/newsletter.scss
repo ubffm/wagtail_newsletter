@@ -1,0 +1,47 @@
+
+// import your main SCSS file here
+@import '';
+
+.main-content {
+    
+}
+
+hr.primary-1px{
+    border: 1px solid $primary;
+    opacity: 1 !important;
+}
+
+.newsletter-container{
+    padding-top: 10% !important;
+    padding-bottom: 10% !important;
+}
+
+.text-box{
+    background-color: white;
+    border-radius: 3rem;
+}
+
+#col1 {
+
+    .icon{
+    font-size: 1.25em;
+    height: 3em;
+    padding-right: 2em;
+    }
+
+
+    .icon:hover{
+    fill: $light;
+    }
+
+    #icons a {
+    text-decoration: none;
+    color: $primary;
+    }
+
+    p{
+    font-size: 1.25em;
+    padding-top: .5em;
+    padding-bottom: .5em;
+    }
+}

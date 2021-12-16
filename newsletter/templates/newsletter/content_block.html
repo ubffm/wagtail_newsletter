@@ -1,0 +1,9 @@
+{% load wagtailcore_tags wagtailimages_tags %}
+
+<div class="content-block">
+	{% image value.thumbnail max-400x400 %}
+    <h2>{{ value.heading }}</h2>
+    <h3>{{ value.sub_heading}}</h3>
+
+    <p>{% include_block value.text_content %}</p>
+</div>

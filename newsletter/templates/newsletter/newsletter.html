@@ -1,0 +1,35 @@
+{% extends "base.html" %}
+{% load wagtailcore_tags compress wagtailimages_tags static%}
+
+{% block extra_css %}
+    {% compress css%}
+        <link type="text/x-scss" href="{% static 'scss/newsletter.scss' %}" rel="stylesheet" media="screen">
+    {% endcompress css%}
+{% endblock %}
+
+{% block content %}
+<nav class="blog-categories-nav navbar navbar-dark bg-dark" aria-label="breadcrumb">
+    <div class="container container-fluid text-light fs-5">
+        <ol class="breadcrumb mb-0 mt-1 align-middle">
+            <li class="breadcrumb-item"><a class="text-light text-decoration-none" href="{{page.get_parent.get_parent.url}}">{{page.get_parent.get_parent.title}}</a></li> 
+            <li class="breadcrumb-item"><a class="text-light text-decoration-none" href="{{page.get_parent.url}}">{{ page.get_parent.title }} </a></li>
+            <li class="breadcrumb-item active"><a class="text-light text-decoration-none" href="{{page.url}}">{{page.title}}</a></li>
+        </ol>
+        <form class="d-flex" action="{{ page.get_parent.url }}">
+            <input class="form-control me-2" type="search" name="query" placeholder="Search" aria-label="Search">
+            <button class="btn btn-outline-secondary" type="submit">Search</button>
+        </form>
+    </div>
+</nav>
+<div class="container pt-5 pb-5 content-container">
+    <div class="text-box">
+        <div class="offset-1 col-10 pt-5 pb-5">
+        	<h1>{{page.title}}</h1>
+            <hr class="primary-1px">
+            {% for block in page.body %}
+                {% include_block block %}
+            {% endfor %}
+        </div>
+    </div>
+</div>
+{% endblock %}

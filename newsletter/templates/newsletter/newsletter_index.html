@@ -1,0 +1,46 @@
+{% extends "base.html" %}
+{% load wagtailcore_tags compress wagtailimages_tags static%}
+
+{% block extra_css %}
+    {% compress css%}
+        <link type="text/x-scss" href="{% static 'scss/newsletter.scss' %}" rel="stylesheet" media="screen">
+    {% endcompress css%}
+{% endblock %}
+
+{% block content %}
+<nav class="blog-categories-nav navbar navbar-dark bg-dark" aria-label="breadcrumb">
+    <div class="container container-fluid text-light fs-5">
+        <ol class="breadcrumb mb-0 mt-1 align-middle">
+            <li class="breadcrumb-item"><a class="text-light text-decoration-none" href="{{page.get_parent.url}}">{{page.get_parent.title}}</a></li> 
+            <li class="breadcrumb-item active"><a class="text-light text-decoration-none" href="{{page.url}}">{{page.title}}</a></li>
+        </ol>
+        <form class="d-flex" action="{{ page.get_parent.url }}">
+            <input class="form-control me-2" type="search" name="query" placeholder="Search" aria-label="Search">
+            <button class="btn btn-secondary" type="submit">Search</button>
+        </form>
+    </div>
+</nav>
+<div class="container pt-5 pb-5 content-container">
+	<h1>{{page.title}}</h1>
+    {{page.intro_text|richtext}}
+	<div class="row">
+        <p>Not yet subscribed to our newsletter? <a href="{{page.url}}/subscribe">Subscribe here!</a></p>
+    	<p>Already a subscriber and you want to unsubscribe? <a href="{{page.url}}/unsubscribe">Click here!</a></p>
+    </div>
+    <div class="row g-0">
+        {% for newsletter in newsletters %}
+            <div class="card card-border-primary bg-light m-1" style="max-width: 20em;">
+                <div class="card-header">
+                    <span class="card-text fs-5">{{newsletter.date}}</span>
+                </div>
+                <div class="card-body">
+                    <h5><a href="{% slugurl newsletter.slug %}">{{newsletter.title}}</a></h5>
+                    <div class="card-text">
+                        {{newsletter.teaser|richtext}}
+                    </div>
+                </div>
+            </div>
+    	{% endfor %}
+    </div>
+</div>
+{% endblock content %}
